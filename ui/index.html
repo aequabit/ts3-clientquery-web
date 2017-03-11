@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>TS3 Client Webpanel</title>
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <style>
+        .lbl-settings {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3>Send message</h3>
+        <select class="form-control cmb-type">
+            <option value="global">Global</option>
+            <option value="channel">Channel</option>
+        </select>
+        <div class="input-group">
+            <input type="text" class="form-control txt-message" placeholder="Message">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-primary btn-send">Send</button>
+            </span>
+        </div>
+    </div>
+
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        if (window.module) module = window.module;
+    </script>
+    <script>
+        let rem = require('electron').remote;
+        var send = rem.getGlobal('sendTsCmd');
+
+        $('.btn-send').click(() => {
+            var message = $('.txt-message').val()
+                .split('\\').join('\\\\')
+                .split('/').join('\\/')
+                .split(' ').join('\\s')
+                .split('|').join('\\p');
+
+            var type = $('.cmb-type option:selected').val() == 'channel' ? 2 : 3;
+            send('sendtextmessage', ['targetmode=' + type, 'msg=' + message], (status, response) => {
+                if (status == 1) return $('.lbl-response').html('Error: ' + response);
+                $('.lbl-response').html('Response: ' + response);
+            });
+        });
+    </script>
+</body>
+
+</html>

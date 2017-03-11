@@ -1,0 +1,25 @@
+{
+  "name": "ts3-clientquery-web",
+  "version": "1.0.0",
+  "description": "A simple interface to interact with the TS3 client using the clientquery plugin.",
+  "main": "app.js",
+  "dependencies": {
+    "electron": "^1.6.2",
+    "telnet-client": "^0.13.0",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aequabit/ts3-clientquery-web.git"
+  },
+  "author": "aequabit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aequabit/ts3-clientquery-web/issues"
+  },
+  "homepage": "https://github.com/aequabit/ts3-clientquery-web#readme"
+}
